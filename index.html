@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      -webkit-flex-direction: row;
+      -moz-flex-direction: row;
+      -ms-flex-direction: row;
+      -o-flex-direction: row;
+      flex-direction: row;
+      justify-content: center;
+      -ms-align-items: center;
+      align-items: center;
+    }
+
+    .list {
+      height: 10rem;
+      width: 5rem;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      -ms-flex-direction: column;
+      -o-flex-direction: column;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .item {
+      height: 2rem;
+      width: 100%;
+      border: 1px solid blue;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      -ms-flex-direction: column;
+      -o-flex-direction: column;
+      flex-direction: column;
+      justify-content: center;
+      -ms-align-items: center;
+      align-items: center;
+      animation: enter 0.3s ease-in-out;
+    }
+
+    @keyframes enter {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body onmouseover="moveFoo()" onmouseout="moveFooOut()">
+  <div class="list">
+    <div class="item" data-move-key="1">hey</div>
+    <div class="item" data-move-key="2">sup</div>
+  </div>
+</body>
+<script src="lib/index.js"></script>
+<script>
+  var foo = document.querySelector('.list');
+  var old = foo.innerHTML;
+
+  movt.move('1');
+  movt.move('2');
+
+  var moveFoo = move(() => {
+    foo.innerHTML += '<div class="item">I am new</div>';
+  });
+
+  var moveFooOut = move(() => {
+    foo.innerHTML = old;
+  });
+</script>
+</html>
