@@ -23,74 +23,58 @@
       align-items: center;
     }
 
-    .list {
-      height: 10rem;
-      width: 5rem;
-      display: -webkit-flex;
-      display: -moz-flex;
-      display: -ms-flex;
-      display: -o-flex;
-      display: flex;
-      -webkit-flex-direction: column;
-      -moz-flex-direction: column;
-      -ms-flex-direction: column;
-      -o-flex-direction: column;
-      flex-direction: column;
-      justify-content: center;
+    span {
+      display: inline-block;
+      font-size: 4rem;
+      font-family: Helvetica, sans-serif;
     }
 
-    .item {
-      height: 2rem;
-      width: 100%;
-      border: 1px solid blue;
-      display: -webkit-flex;
-      display: -moz-flex;
-      display: -ms-flex;
-      display: -o-flex;
-      display: flex;
-      -webkit-flex-direction: column;
-      -moz-flex-direction: column;
-      -ms-flex-direction: column;
-      -o-flex-direction: column;
-      flex-direction: column;
-      justify-content: center;
-      -ms-align-items: center;
-      align-items: center;
-      animation: enter 0.3s ease-in-out;
+    span.new {
+      position: absolute;
+      opacity: 0;
+    }
+
+    body.move span.new {
+      position: relative;
+      animation: enter 0.3s ease-in-out both;
     }
 
     @keyframes enter {
       from {
-        transform: scale(0.8);
+        transform: translateY(200%);
         opacity: 0;
       }
       to {
-        transform: scale(1);
+        transform: translateY(0);
         opacity: 1;
       }
     }
   </style>
 </head>
 <body onmouseover="moveFoo()" onmouseout="moveFooOut()">
-  <div class="list">
-    <div class="item" data-move-key="1">hey</div>
-    <div class="item" data-move-key="2">sup</div>
-  </div>
+  <span data-move-key="0">R</span>
+  <span data-move-key="1">A</span>
+  <span data-move-key="2" class="new">M</span>
+  <span data-move-key="3" class="new">O</span>
+  <span data-move-key="4">T</span>
+  <span data-move-key="5">I</span>
+  <span data-move-key="6">O</span>
+  <span data-move-key="7" class="new">N</span>
 </body>
 <script src="lib/index.js"></script>
 <script>
-  var foo = document.querySelector('.list');
-  var old = foo.innerHTML;
+  var body = document.querySelector('body');
 
-  movt.move('1');
-  movt.move('2');
+  [0,1,4,5,6].forEach((i) => {
+    movt.move(i);
+  });
 
   var moveFoo = move(() => {
-    foo.innerHTML += '<div class="item">I am new</div>';
+    body.className="move";
   });
 
   var moveFooOut = move(() => {
-    foo.innerHTML = old;
+    body.className="";
   });
 </script>
 </html>

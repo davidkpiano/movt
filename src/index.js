@@ -77,14 +77,12 @@ class Movement {
 
   move(key) {
     const node = document.querySelector(`[data-move-key="${key}"]`);
+
+    if (!node) return;
     
     const prev = window.movtState[key];
     const rand = randomString(4);
     const pos = position(key);
-
-      console.log('\tbefore move', {...movtState[key]})
-      console.log('move', position(key));
-
 
     if (!prev) {
       window.movtState[key] = {
@@ -108,11 +106,6 @@ class Movement {
         animation: ${rand} 0.3s ease-in-out none;
       }
     `);
-
-    // Object.assign(window.movtState[key], {
-    //   node,
-    //   ...pos
-    // });
 
     return rand;
   }
