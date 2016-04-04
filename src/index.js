@@ -6,7 +6,7 @@ function randomString(length) {
 }
 
 const getY = ( elem ) => {
-  // return elem.getBoundingClientRect().top;
+  return elem.getBoundingClientRect().top;
   let location = 0;
   if (elem.offsetParent) {
     do {
@@ -19,7 +19,7 @@ const getY = ( elem ) => {
 };
 
 const getX = ( elem ) => {
-  // return elem.getBoundingClientRect().left;
+  return elem.getBoundingClientRect().left;
   let location = 0;
   if (elem.offsetParent) {
     do {
@@ -102,7 +102,7 @@ class Movement {
         }
       }
 
-      [data-move-key="${key}"] {
+      :root:not([data-move-active="false"]) [data-move-key="${key}"] {
         animation: ${rand} 0.3s ease-in-out none;
       }
     `);
@@ -121,9 +121,12 @@ function move(fn) {
   return () => {  
     movt.updateAll();
 
+    document.querySelector('html').setAttribute('data-move-active', false);
+
     const result = fn();
 
-    movt.moveAll();
+    movt.moveAll()
+    document.querySelector('html').setAttribute('data-move-active', true);
 
     return result;
   }
